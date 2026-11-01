@@ -1,0 +1,482 @@
+---
+title: "Ginnever's Rashomon: 15 Pieces, 15 Unique Resting Positions"
+subtitle: "Using Multidimensional Scaling to Fix the Exhibit"
+author: "Dianne Cook <br> Monash University <br> Melbourne, Australia"
+date: "`r Sys.Date()`"
+format:
+  revealjs:
+    multiplex: false
+    slide-number: c/t
+    slide-tone: false
+    theme: "custom.scss"
+    chalkboard: true
+    code-fold: true
+    highlight-style: github
+    code-line-numbers: true
+    footer: "[https://github.com/dicook/Rashomon/](https://github.com/dicook/Rashomon/)"
+    width: 1600
+    height: 900
+    margin: 0.05
+    embed-resources: false
+filters:
+  - more-fragments
+  - roughnotation
+execute:
+  echo: false
+  warning: false
+  message: false
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(readr)
+library(tibble)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(tourr)
+library(detourr)
+library(here)
+library(colorspace)
+library(patchwork)
+set.seed(2014)
+knitr::opts_chunk$set(fig.retina = 3, dev.args = list(bg = "transparent"))
+theme_set(theme_minimal(base_size = 18))
+```
+
+# The sculpture {.topic-slide}
+
+## Rashomon, by Chuck Ginnever
+
+::: columns
+::: {.column width="55%"}
+![](images/installation.png){fig-alt="Photo of the installation" width="90%"}
+:::
+
+::: {.column width="45%"}
+
+If I tell you that these sculptures are identical, do you believe me?
+
+<br>
+
+::: {.fragment}
+
+- a multi-piece geometric sculpture
+- 15 **identical** sculptures
+- Each rests in a **different orientation**
+- Placed together in a gallery or landscape, the eye insists they are 15 different shapes
+:::
+:::
+
+
+:::
+
+::: notes
+~2 min. Set up the paradox. Ask the audience: if I tell you they are identical, do you believe it?
+:::
+
+## The rule
+
+
+- 2014: the exhibit came to Iowa State University
+- I was asked to curate it
+- I'm a statistician, and had no idea what was involved in curating any exhibit, and why this one?
+- but as the discussions continued, the project became intriguing
+
+::: {.fragment}
+
+<br>
+
+To be allowed to exhibit Rashomon, the institution needed to abide by the rule:
+
+
+> [The objects must be placed in **15 distinct orientations**.]{.f150}
+
+:::
+
+## Why "Rashomon"?
+
+The title comes from Akira Kurosawa's 1950 film ***Rashomon***
+
+- Adapted from two Ryūnosuke Akutagawa short stories, *Rashōmon* (1915) and *In a Grove* (1922)
+- A samurai is killed in a forest. Four witnesses each tell the story, and each version is plausible
+- The film never says which version is true
+
+::: {.fragment}
+
+The **Rashomon effect**: one event, many contradictory accounts, each shaped by the teller's viewpoint
+
+:::
+
+# Mathematical study of the shape {.topic-slide}
+
+## Step I
+
+:::: {.columns}
+::: {.column width="30%"}
+Examine one of the sculptures carefully, by taking photos from different angles
+:::
+::: {.column width="70%"}
+
+![](images/1a.JPG){width="25%"}
+![](images/1b.JPG){width="25%"}
+![](images/1c.JPG){width="25%"}
+![](images/1d.JPG){width="25%"}
+![](images/1e.JPG){width="25%"}
+![](images/1f.JPG){width="25%"}
+
+
+:::
+::::
+
+## Step II
+
+:::: {.columns}
+::: {.column width="50%"}
+Sketch the sculpture and label the vertices like a regular sort of geometric shape. There were 21 vertices, we labelled A-U.
+
+<br><br>
+
+![](images/1f.JPG){width="50%" fig-align="center"}
+
+:::
+::: {.column width="50%"}
+
+![](images/sketch.jpg){width="75%" fig-align="center"}
+:::
+::::
+
+## Step III
+
+:::: {.columns}
+::: {.column width="30%"}
+
+Measured the distance between every pair of vertices.
+
+:::
+::: {.column width="70%"}
+
+![](images/sketch-distances.png){width="100%" fig-align="center"}
+:::
+::::
+
+## Step IV [(1/3)]{.f50}
+
+:::: {.columns}
+::: {.column}
+
+Construct a virtual model of the shape, that can be used to test the different orientations.
+
+This is done using multidimensional scaling on the distances matrix. 
+
+:::
+::: {.column}
+
+```{r}
+#| label: heatmap-not-used
+#| fig-height: 5.5
+#| fig-width: 7
+#| echo: true
+# Long format: one row per vertex pair. d = original distance,
+# new_d = revised distance (only for some pairs)
+dist_long <- read_csv(here::here("data", "distances-new.csv"), skip = 1,
+  col_names = c("V1", "V2", "d", "m", "delta", "new_d"),
+  col_select = 1:6, show_col_types = FALSE)
+
+vertices <- sort(unique(c(dist_long$V1, dist_long$V2)))
+
+to_matrix <- function(df, value) {
+  m <- matrix(0, length(vertices), length(vertices),
+              dimnames = list(vertices, vertices))
+  m[cbind(df$V1, df$V2)] <- df[[value]]
+  m[cbind(df$V2, df$V1)] <- df[[value]]
+  m
+}
+dist_long <- dist_long |>
+  mutate(d_rev = coalesce(new_d, d))   # use revised value when we have one
+D0 <- to_matrix(dist_long, "d")        # original distances
+D  <- to_matrix(dist_long, "d_rev")    # revised distances
+D |>
+  as.data.frame() |>
+  rownames_to_column("from") |>
+  pivot_longer(-from, names_to = "to", values_to = "d") |>
+  mutate(from = factor(from, levels = rownames(D)),
+         to = factor(to, levels = rev(rownames(D)))) |>
+  ggplot(aes(from, to, fill = d)) +
+    geom_tile() +
+    scale_fill_continuous_sequential("Viridis", rev = FALSE) +
+    coord_equal() +
+    labs(x = "", y = "", fill = "Distance") +
+    theme(panel.grid = element_blank())
+```
+
+:::
+::::
+
+## Step IV [(2/3)]{.f50}
+
+:::: {.columns}
+::: {.column .f80}
+
+Given squared distances $D^{(2)} = [d_{ij}^2]$ among $n$ points:
+
+1. Double-centre: $B = -\tfrac{1}{2}\, J D^{(2)} J, \quad J = I - \tfrac{1}{n}\mathbf{1}\mathbf{1}^\top$
+2. Eigen-decompose: $B = V \Lambda V^\top$
+3. Coordinates: $X = V_k \Lambda_k^{1/2}$, using the top $k$ eigenpairs
+
+::: {.fragment}
+
+- If the $d_{ij}$ are exactly Euclidean distances in $\mathbb{R}^3$, then $B$ has rank 3
+- $X$ is recovered up to **rotation, reflection and translation**
+
+
+:::
+:::
+::: {.column}
+::: {.fragment}
+
+```{r}
+#| label: eigen
+#| fig-height: 4.5
+#| fig-width: 8
+mds <- cmdscale(D, k = 3, eig = TRUE)
+tibble(k = seq_along(mds$eig), eigenvalue = mds$eig) |>
+  ggplot(aes(k, eigenvalue)) +
+    geom_col(fill = "#1b7a8c") +
+    geom_hline(yintercept = 0) +
+    scale_x_continuous(breaks = seq_along(mds$eig)) +
+    labs(x = "Component", y = "Eigenvalue") +
+    theme_minimal()
+```
+
+::: {.f70}
+- Three large eigenvalues (about 19,000, 16,000 and 11,000), then a drop to about 2,500
+- The next four eigenvalues being non-zero indicate measurement error
+- Negative eigenvalues are numerical error
+- The three dimensions capture about 85% of the total
+:::
+:::
+:::
+::::
+
+## Step IV [(3/3)]{.f50}
+
+:::: {.columns}
+::: {.column}
+
+- Use the first three components as node positions in 3D
+- Edges are constructed manually, based on study of one shape
+
+<br>
+
+![](images/sketch-edges.png){width="50%" fig-align="center"}
+
+:::
+::: {.column}
+
+<br><br><br>
+
+![](images/mds-ggobi.gif){width="70%" fig-align="center"}
+
+:::
+:::: 
+
+# Back to the exhibit {.topic-slide}
+
+## Vertices and orientations
+
+::: columns
+::: {.column width="40%"}
+- An **orientation** is the set of vertices (or edges, or face) touching the ground
+- e.g. `ABCDE` is a face; `BC, NU` is two edges
+
+Using our virtual model, we visited the exhibit, rotated one sculpture until we had found all 15 orientations, and documented these. 
+
+:::
+
+::: {.column width="60%"}
+
+::: {.fragment}
+
+::: {.f70}
+
+::: {.panel-tabset}
+
+## Layout
+
+![](images/arrangement.png){width="60%" fig-align="center"}
+
+## Orientation
+
+```{r}
+#| label: configs
+configs <- tribble(
+  ~sculpture, ~final,
+   1,   "BC, NU",
+   2,     "DE, K",
+   3,     "AF, FM",
+   4,    "HJS, LT",
+   5,   "FM, FH, MO",
+   6,       "MOPU",
+   7,    "CDQP, U",
+   8,     "KLS, D",
+   9,      "ABCDE",
+  10,    "AE, IK",
+  11,      "DP, PT, TL, LS",
+  12,     "HIJKS",
+  13,    "PTO, H",
+  14,     "A, MNU",
+  15,   "AF, HI, FH"
+)
+configs |>
+  knitr::kable(col.names = c("Sculpture", "Final"),
+               align = "ll")
+```
+
+:::
+:::
+:::
+:::
+::::
+
+
+## Catalog 
+
+::: {.panel-tabset}
+
+## 1
+
+![](images/catalog1.png){width="60%" fig-align="center"}
+
+## 2
+
+![](images/catalog2.png){width="60%" fig-align="center"}
+
+## 3
+
+![](images/catalog3.png){width="60%" fig-align="center"}
+
+## 4
+
+![](images/catalog4.png){width="60%" fig-align="center"}
+
+## 5
+
+![](images/catalog5.png){width="50%" fig-align="center"}
+
+## 6
+
+![](images/catalog6.png){width="60%" fig-align="center"}
+
+## 7
+
+![](images/catalog7.png){width="60%" fig-align="center"}
+
+## 8
+
+![](images/catalog8.png){width="60%" fig-align="center"}
+
+## 9
+
+![](images/catalog9.png){width="50%" fig-align="center"}
+
+## 10
+
+![](images/catalog10.png){width="50%" fig-align="center"}
+
+## 11
+
+![](images/catalog11.png){width="60%" fig-align="center"}
+
+## 12
+
+![](images/catalog12.png){width="50%" fig-align="center"}
+
+## 13
+
+![](images/catalog13.png){width="50%" fig-align="center"}
+
+## 14
+
+![](images/catalog14.png){width="50%" fig-align="center"}
+
+## 15
+
+![](images/catalog15.png){width="50%" fig-align="center"}
+
+:::
+
+## Extra details
+
+- No new ways to rest the pieces was found
+- The sculpture layout as set up by the movers had two pairs of pieces in duplicated orientations
+- Not all distances were needed, once the main distances were computed the remaining pairwises distances were roughly estimated
+- By examining residuals from observed distance to fitted distance in 3D we found some mistakes in our measuring which were fixed
+
+# Fun with curation {.topic-slide}
+
+## Rearranging and photographing
+
+- Each week two sculptures swapped orientations
+- 17 weekly rearrangements (e.g. Week 1: 1 <-> 9, Week 2: 8 <-> 14, ...)
+- Photographed each week; combined into a video
+
+:::: {.columns}
+::: {.column}
+
+```
+- Week 1: 1 <--> 9
+- Week 2: 8 <--> 14
+- Week 3: 4 <--> 5
+- Week 4: 7 <--> 15
+- Week 5: 2 <--> 13
+- Week 6: 6 <--> 11
+- Week 7: 3 <--> 10
+- Week 8: 6 (now ED, K) <--> 12 (now DP, TL)
+- Week 9: 2 <--> 8
+- Week 10: 9 <--> 12
+- Week 11 (June 11): 3 <--> 4
+- Week 12 (june 17) 13 <--> 14
+- Week 13 (june 24) 5 <--> 7
+- Week 14 (July 1) 1 <--> 6
+- Week 15 (July 9) 10 <--> 11
+- Week 16 (July 16) 7 (4) <--> 13 (8)
+- Week 17 (July 23) 14 <--> 15
+```
+
+:::
+::: {.column}
+
+![](images/courtyard_smooth.gif)
+
+:::
+::::
+
+# Wrap up {.topic-slide}
+
+## Summary
+
+- Sometimes strong connections between math and art
+- The curation rule (15 distinct orientations) turned into a data problem: what are all the ways this shape can rest?
+- Pairwise distances between 21 hand-measured vertices were enough to rebuild the shape in 3D with classical MDS
+- The eigenvalues confirmed the object is essentially 3D (~85% of variation), and residuals helped find measurement mistakes
+- The virtual model let us check the installation: the movers' layout had two duplicated orientations, and no new resting positions turned up
+- Once we understood the shape, we could keep playing with it, swapping orientations each week to give the exhibit a sense of motion
+
+::: {.fragment}
+What would you do, if you were asked to curate this sculpture exhibit?
+:::
+
+## Resources
+
+- Materials: [github.com/dicook/Rashomon](https://github.com/dicook/Rashomon)
+- `tourr`: [ggobi.github.io/tourr](https://ggobi.github.io/tourr/)
+- `detourr`: [casperhart.github.io/detourr](https://casperhart.github.io/detourr/)
+- Sculpture: Chuck Ginnever, *Rashomon*
+
+*Work conducted in collaboration with Professor Heike Hofmann, and thanks to Iowa State University Museums for providing the challenge.*
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+

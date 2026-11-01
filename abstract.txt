@@ -1,0 +1,5 @@
+Fifteen Ways to Rest: Fixing a Sculpture Exhibit Using Multidimensional Scaling
+
+Chuck Ginnever's sculpture Rashomon consists of 15 identical forms, each resting differently, so that the same object is seen from 15 viewpoints. When arranged in a gallery or a landscape, the viewer is trapped in a paradox: even when told all 15 sculptures are identical copies, the eye insists that each jagged, twisted form is a unique shape. 
+
+The requirement for exhibiting the work is that the objects are placed in 15 distinct orientations. In 2014, the exhibit came to Iowa State University, and I was asked to curate the exhibit. That was a surprise: a statistician asked to curate a sculpture exhibit! With my colleague Heike Hofmann, we realised that the current arrangement, inherited from the last institution where it was displayed, violated this requirement. This talk tells the story of how we fixed the exhibit by applying multidimensional scaling to generate 3D coordinates of the object from hand-measured distances. 

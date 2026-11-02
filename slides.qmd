@@ -13,7 +13,7 @@ format:
     code-fold: true
     highlight-style: github
     code-line-numbers: true
-    footer: "[https://github.com/dicook/Rashomon/](https://github.com/dicook/Rashomon/)"
+    footer: "[https://github.com/dicook/AIMS-Rashomon](https://github.com/dicook/AIMS-Rashomon)"
     width: 1600
     height: 900
     margin: 0.05

@@ -63,10 +63,10 @@ If I tell you that these sculptures are identical, do you believe me?
 
 ::: {.fragment}
 
-- a multi-piece geometric sculpture
+- A multi-piece geometric sculpture
 - 15 **identical** sculptures
 - Each rests in a **different orientation**
-- Placed together in a gallery or landscape, the eye insists they are 15 different shapes
+- When they are placed together in a gallery or landscape, the eye insists they are 15 different shapes
 :::
 :::
 
@@ -82,8 +82,8 @@ If I tell you that these sculptures are identical, do you believe me?
 
 - 2014: the exhibit came to Iowa State University
 - I was asked to curate it
-- I'm a statistician, and had no idea what was involved in curating any exhibit, and why this one?
-- but as the discussions continued, the project became intriguing
+- I'm a statistician, and had no idea what was involved in curating an exhibit, let alone why I was asked to curate this one
+- As the discussions continued, the project became more intriguing and challenging
 
 ::: {.fragment}
 
@@ -116,7 +116,7 @@ The **Rashomon effect**: one event, many contradictory accounts, each shaped by 
 
 :::: {.columns}
 ::: {.column width="30%"}
-Examine one of the sculptures carefully, by taking photos from different angles
+Examine one of the sculptures carefully by taking photos from different angles
 :::
 ::: {.column width="70%"}
 
@@ -135,7 +135,7 @@ Examine one of the sculptures carefully, by taking photos from different angles
 
 :::: {.columns}
 ::: {.column width="50%"}
-Sketch the sculpture and label the vertices like a regular sort of geometric shape. There were 21 vertices, we labelled A-U.
+Sketch the sculpture and label the vertices as you would for a polyhedron. There were 21 vertices, which we labelled A–U.
 
 <br><br>
 
@@ -153,7 +153,7 @@ Sketch the sculpture and label the vertices like a regular sort of geometric sha
 :::: {.columns}
 ::: {.column width="30%"}
 
-Measured the distance between every pair of vertices.
+Measure the distance between every pair of vertices.
 
 :::
 ::: {.column width="70%"}
@@ -167,9 +167,9 @@ Measured the distance between every pair of vertices.
 :::: {.columns}
 ::: {.column}
 
-Construct a virtual model of the shape, that can be used to test the different orientations.
+Construct a virtual model of the shape that can be used to test the different orientations.
 
-This is done using multidimensional scaling on the distances matrix. 
+This is done using multidimensional scaling on the distance matrix. 
 
 :::
 ::: {.column}
@@ -220,6 +220,8 @@ D |>
 :::: {.columns}
 ::: {.column .f80}
 
+Classical multidimensional scaling:
+
 Given squared distances $D^{(2)} = [d_{ij}^2]$ among $n$ points:
 
 1. Double-centre: $B = -\tfrac{1}{2}\, J D^{(2)} J, \quad J = I - \tfrac{1}{n}\mathbf{1}\mathbf{1}^\top$
@@ -253,9 +255,9 @@ tibble(k = seq_along(mds$eig), eigenvalue = mds$eig) |>
 
 ::: {.f70}
 - Three large eigenvalues (about 19,000, 16,000 and 11,000), then a drop to about 2,500
-- The next four eigenvalues being non-zero indicate measurement error
+- The next four eigenvalues are non-zero, indicating measurement error
 - Negative eigenvalues are numerical error
-- The three dimensions capture about 85% of the total
+- The three dimensions capture about 85% of the total variation
 :::
 :::
 :::
@@ -267,7 +269,7 @@ tibble(k = seq_along(mds$eig), eigenvalue = mds$eig) |>
 ::: {.column}
 
 - Use the first three components as node positions in 3D
-- Edges are constructed manually, based on study of one shape
+- Edges are constructed manually, based on studying one sculpture
 
 <br>
 
@@ -289,10 +291,10 @@ tibble(k = seq_along(mds$eig), eigenvalue = mds$eig) |>
 
 ::: columns
 ::: {.column width="40%"}
-- An **orientation** is the set of vertices (or edges, or face) touching the ground
-- e.g. `ABCDE` is a face; `BC, NU` is two edges
+- An **orientation** is the vertices, edges or face touching the ground
+- e.g. `ABCDE` is a face; `BC, NU` are two edges
 
-Using our virtual model, we visited the exhibit, rotated one sculpture until we had found all 15 orientations, and documented these. 
+Armed with our virtual model, we visited the exhibit, rotated one piece until we had found all 15 orientations, and documented them. 
 
 :::
 
@@ -410,17 +412,17 @@ configs |>
 
 ## Extra details
 
-- No new ways to rest the pieces was found
+- No new ways to rest the pieces were found
 - The sculpture layout as set up by the movers had two pairs of pieces in duplicated orientations
-- Not all distances were needed, once the main distances were computed the remaining pairwises distances were roughly estimated
-- By examining residuals from observed distance to fitted distance in 3D we found some mistakes in our measuring which were fixed
+- Not all distances were needed: once the main distances were measured, the remaining pairwise distances were roughly estimated
+- By examining residuals between observed and fitted 3D distances, we found (and fixed) some measurement mistakes
 
 # Fun with curation {.topic-slide}
 
 ## Rearranging and photographing
 
 - Each week two sculptures swapped orientations
-- 17 weekly rearrangements (e.g. Week 1: 1 <-> 9, Week 2: 8 <-> 14, ...)
+- 17 weekly rearrangements 
 - Photographed each week; combined into a video
 
 :::: {.columns}
@@ -434,16 +436,16 @@ configs |>
 - Week 5: 2 <--> 13
 - Week 6: 6 <--> 11
 - Week 7: 3 <--> 10
-- Week 8: 6 (now ED, K) <--> 12 (now DP, TL)
+- Week 8: 6 (now DE, K) <--> 12 (now DP, TL)
 - Week 9: 2 <--> 8
 - Week 10: 9 <--> 12
 - Week 11 (June 11): 3 <--> 4
-- Week 12 (june 17) 13 <--> 14
-- Week 13 (june 24) 5 <--> 7
-- Week 14 (July 1) 1 <--> 6
-- Week 15 (July 9) 10 <--> 11
-- Week 16 (July 16) 7 (4) <--> 13 (8)
-- Week 17 (July 23) 14 <--> 15
+- Week 12 (June 17): 13 <--> 14
+- Week 13 (June 24): 5 <--> 7
+- Week 14 (July 1): 1 <--> 6
+- Week 15 (July 9): 10 <--> 11
+- Week 16 (July 16): 7 (4) <--> 13 (8)
+- Week 17 (July 23): 14 <--> 15
 ```
 
 :::
@@ -458,7 +460,7 @@ configs |>
 
 ## Summary
 
-- Sometimes strong connections between math and art
+- There can be strong connections between maths and art
 - The curation rule (15 distinct orientations) turned into a data problem: what are all the ways this shape can rest?
 - Pairwise distances between 21 hand-measured vertices were enough to rebuild the shape in 3D with classical MDS
 - The eigenvalues confirmed the object is essentially 3D (~85% of variation), and residuals helped find measurement mistakes
@@ -466,7 +468,7 @@ configs |>
 - Once we understood the shape, we could keep playing with it, swapping orientations each week to give the exhibit a sense of motion
 
 ::: {.fragment}
-What would you do, if you were asked to curate this sculpture exhibit?
+What would you do if you were asked to curate this sculpture exhibit?
 :::
 
 ## Resources
@@ -476,7 +478,7 @@ What would you do, if you were asked to curate this sculpture exhibit?
 - `detourr`: [casperhart.github.io/detourr](https://casperhart.github.io/detourr/)
 - Sculpture: Chuck Ginnever, *Rashomon*
 
-*Work conducted in collaboration with Professor Heike Hofmann, and thanks to Iowa State University Museums for providing the challenge.*
+*Work conducted in collaboration with Professor Heike Hofmann. Thanks to Iowa State University Museums for providing the challenge.*
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 

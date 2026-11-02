@@ -235,10 +235,10 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <p><br></p>
 <div class="fragment">
 <ul>
-<li>a multi-piece geometric sculpture</li>
+<li>A multi-piece geometric sculpture</li>
 <li>15 <strong>identical</strong> sculptures</li>
 <li>Each rests in a <strong>different orientation</strong></li>
-<li>Placed together in a gallery or landscape, the eye insists they are 15 different shapes</li>
+<li>When they are placed together in a gallery or landscape, the eye insists they are 15 different shapes</li>
 </ul>
 </div>
 </div></div>
@@ -261,8 +261,8 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <ul>
 <li>2014: the exhibit came to Iowa State University</li>
 <li>I was asked to curate it</li>
-<li>I’m a statistician, and had no idea what was involved in curating any exhibit, and why this one?</li>
-<li>but as the discussions continued, the project became intriguing</li>
+<li>I’m a statistician, and had no idea what was involved in curating an exhibit, let alone why I was asked to curate this one</li>
+<li>As the discussions continued, the project became more intriguing and challenging</li>
 </ul>
 <div class="fragment">
 <p><br></p>
@@ -293,7 +293,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Step I</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p>Examine one of the sculptures carefully, by taking photos from different angles</p>
+<p>Examine one of the sculptures carefully by taking photos from different angles</p>
 </div><div class="column" style="width:70%;">
 <p><img data-src="images/1a.JPG" style="width:25.0%"> <img data-src="images/1b.JPG" style="width:25.0%"> <img data-src="images/1c.JPG" style="width:25.0%"> <img data-src="images/1d.JPG" style="width:25.0%"> <img data-src="images/1e.JPG" style="width:25.0%"> <img data-src="images/1f.JPG" style="width:25.0%"></p>
 </div></div>
@@ -302,7 +302,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Step II</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p>Sketch the sculpture and label the vertices like a regular sort of geometric shape. There were 21 vertices, we labelled A-U.</p>
+<p>Sketch the sculpture and label the vertices as you would for a polyhedron. There were 21 vertices, which we labelled A–U.</p>
 <p><br><br></p>
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -321,7 +321,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Step III</h2>
 <div class="columns">
 <div class="column" style="width:30%;">
-<p>Measured the distance between every pair of vertices.</p>
+<p>Measure the distance between every pair of vertices.</p>
 </div><div class="column" style="width:70%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -334,8 +334,8 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Step IV <span class="f50">(1/3)</span></h2>
 <div class="columns">
 <div class="column">
-<p>Construct a virtual model of the shape, that can be used to test the different orientations.</p>
-<p>This is done using multidimensional scaling on the distances matrix.</p>
+<p>Construct a virtual model of the shape that can be used to test the different orientations.</p>
+<p>This is done using multidimensional scaling on the distance matrix.</p>
 </div><div class="column">
 <div class="cell">
 <details class="code-fold">
@@ -386,6 +386,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Step IV <span class="f50">(2/3)</span></h2>
 <div class="columns">
 <div class="column f80">
+<p>Classical multidimensional scaling:</p>
 <p>Given squared distances <span class="math inline">\(D^{(2)} = [d_{ij}^2]\)</span> among <span class="math inline">\(n\)</span> points:</p>
 <ol type="1">
 <li>Double-centre: <span class="math inline">\(B = -\tfrac{1}{2}\, J D^{(2)} J, \quad J = I - \tfrac{1}{n}\mathbf{1}\mathbf{1}^\top\)</span></li>
@@ -412,9 +413,9 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <div class="f70">
 <ul>
 <li>Three large eigenvalues (about 19,000, 16,000 and 11,000), then a drop to about 2,500</li>
-<li>The next four eigenvalues being non-zero indicate measurement error</li>
+<li>The next four eigenvalues are non-zero, indicating measurement error</li>
 <li>Negative eigenvalues are numerical error</li>
-<li>The three dimensions capture about 85% of the total</li>
+<li>The three dimensions capture about 85% of the total variation</li>
 </ul>
 </div>
 </div>
@@ -426,7 +427,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <div class="column">
 <ul>
 <li>Use the first three components as node positions in 3D</li>
-<li>Edges are constructed manually, based on study of one shape</li>
+<li>Edges are constructed manually, based on studying one sculpture</li>
 </ul>
 <p><br></p>
 <div class="quarto-figure quarto-figure-center">
@@ -453,10 +454,10 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
-<li>An <strong>orientation</strong> is the set of vertices (or edges, or face) touching the ground</li>
-<li>e.g.&nbsp;<code>ABCDE</code> is a face; <code>BC, NU</code> is two edges</li>
+<li>An <strong>orientation</strong> is the vertices, edges or face touching the ground</li>
+<li>e.g.&nbsp;<code>ABCDE</code> is a face; <code>BC, NU</code> are two edges</li>
 </ul>
-<p>Using our virtual model, we visited the exhibit, rotated one sculpture until we had found all 15 orientations, and documented these.</p>
+<p>Armed with our virtual model, we visited the exhibit, rotated one piece until we had found all 15 orientations, and documented them.</p>
 </div><div class="column" style="width:60%;">
 <div class="fragment">
 <div class="f70">
@@ -668,10 +669,10 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <section id="extra-details" class="slide level2">
 <h2>Extra details</h2>
 <ul>
-<li>No new ways to rest the pieces was found</li>
+<li>No new ways to rest the pieces were found</li>
 <li>The sculpture layout as set up by the movers had two pairs of pieces in duplicated orientations</li>
-<li>Not all distances were needed, once the main distances were computed the remaining pairwises distances were roughly estimated</li>
-<li>By examining residuals from observed distance to fitted distance in 3D we found some mistakes in our measuring which were fixed</li>
+<li>Not all distances were needed: once the main distances were measured, the remaining pairwise distances were roughly estimated</li>
+<li>By examining residuals between observed and fitted 3D distances, we found (and fixed) some measurement mistakes</li>
 </ul>
 </section></section>
 <section>
@@ -683,7 +684,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <h2>Rearranging and photographing</h2>
 <ul>
 <li>Each week two sculptures swapped orientations</li>
-<li>17 weekly rearrangements (e.g.&nbsp;Week 1: 1 &lt;-&gt; 9, Week 2: 8 &lt;-&gt; 14, …)</li>
+<li>17 weekly rearrangements</li>
 <li>Photographed each week; combined into a video</li>
 </ul>
 <div class="columns">
@@ -695,16 +696,16 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 - Week 5: 2 &lt;--&gt; 13
 - Week 6: 6 &lt;--&gt; 11
 - Week 7: 3 &lt;--&gt; 10
-- Week 8: 6 (now ED, K) &lt;--&gt; 12 (now DP, TL)
+- Week 8: 6 (now DE, K) &lt;--&gt; 12 (now DP, TL)
 - Week 9: 2 &lt;--&gt; 8
 - Week 10: 9 &lt;--&gt; 12
 - Week 11 (June 11): 3 &lt;--&gt; 4
-- Week 12 (june 17) 13 &lt;--&gt; 14
-- Week 13 (june 24) 5 &lt;--&gt; 7
-- Week 14 (July 1) 1 &lt;--&gt; 6
-- Week 15 (July 9) 10 &lt;--&gt; 11
-- Week 16 (July 16) 7 (4) &lt;--&gt; 13 (8)
-- Week 17 (July 23) 14 &lt;--&gt; 15</code></pre>
+- Week 12 (June 17): 13 &lt;--&gt; 14
+- Week 13 (June 24): 5 &lt;--&gt; 7
+- Week 14 (July 1): 1 &lt;--&gt; 6
+- Week 15 (July 9): 10 &lt;--&gt; 11
+- Week 16 (July 16): 7 (4) &lt;--&gt; 13 (8)
+- Week 17 (July 23): 14 &lt;--&gt; 15</code></pre>
 </div><div class="column">
 <p><img data-src="images/courtyard_smooth.gif"></p>
 </div></div>
@@ -717,7 +718,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>Sometimes strong connections between math and art</li>
+<li>There can be strong connections between maths and art</li>
 <li>The curation rule (15 distinct orientations) turned into a data problem: what are all the ways this shape can rest?</li>
 <li>Pairwise distances between 21 hand-measured vertices were enough to rebuild the shape in 3D with classical MDS</li>
 <li>The eigenvalues confirmed the object is essentially 3D (~85% of variation), and residuals helped find measurement mistakes</li>
@@ -725,7 +726,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <li>Once we understood the shape, we could keep playing with it, swapping orientations each week to give the exhibit a sense of motion</li>
 </ul>
 <div class="fragment">
-<p>What would you do, if you were asked to curate this sculpture exhibit?</p>
+<p>What would you do if you were asked to curate this sculpture exhibit?</p>
 </div>
 </section>
 <section id="resources" class="slide level2">
@@ -736,7 +737,7 @@ Dianne Cook <br> Monash University <br> Melbourne, Australia
 <li><code>detourr</code>: <a href="https://casperhart.github.io/detourr/">casperhart.github.io/detourr</a></li>
 <li>Sculpture: Chuck Ginnever, <em>Rashomon</em></li>
 </ul>
-<p><em>Work conducted in collaboration with Professor Heike Hofmann, and thanks to Iowa State University Museums for providing the challenge.</em></p>
+<p><em>Work conducted in collaboration with Professor Heike Hofmann. Thanks to Iowa State University Museums for providing the challenge.</em></p>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
 
 </section></section>

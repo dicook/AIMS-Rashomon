@@ -463,12 +463,12 @@ configs |>
 - There can be strong connections between maths and art
 - The curation rule (15 distinct orientations) turned into a data problem: what are all the ways this shape can rest?
 - Pairwise distances between 21 hand-measured vertices were enough to rebuild the shape in 3D with classical MDS
-- The eigenvalues confirmed the object is essentially 3D (~85% of variation), and residuals helped find measurement mistakes
+- Residuals from this fit helped find measurement mistakes
 - The virtual model let us check the installation: the movers' layout had two duplicated orientations, and no new resting positions turned up
 - Once we understood the shape, we could keep playing with it, swapping orientations each week to give the exhibit a sense of motion
 
-::: {.fragment}
-What would you do if you were asked to curate this sculpture exhibit?
+::: {.fragment .f120}
+> What would you do if you were asked to curate this sculpture exhibit?
 :::
 
 ## Resources
